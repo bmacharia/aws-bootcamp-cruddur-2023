@@ -65,11 +65,6 @@ def data_home():
   data = HomeActivities.run()
   return data, 200
 
-@app.route("/api/activities/activities", methods=['GET'])
-def data_home():
-  data = NotificationsActivities.run()
-  return data, 200
-
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
 def data_handle(handle):
   model = UserActivities.run(handle)
