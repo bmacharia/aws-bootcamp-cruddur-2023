@@ -13,6 +13,8 @@ services:
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
+      AWS_COGNITO_USER_POOL_ID: "us-west-2_P4oMs4M9w"
+      AWS_COGNITO_USER_POOL_CLIENT_ID: "3053vq0l0b49qsrq4mt78t7mgg"   
     build: ./backend-flask
     ports:
       - "4567:4567"
@@ -21,6 +23,12 @@ services:
   frontend-react-js:
     environment:
       REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      # AWS Amplify
+      REACT_APP_AWS_PROJECT_REGION: "${AWS_DEFAULT_REGION}"
+      REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
+      REACT_APP_AWS_USER_POOLS_ID: "us-west-2_P4oMs4M9w"
+      REACT_APP_CLIENT_ID: "3053vq0l0b49qsrq4mt78t7mgg"
+
     build: ./frontend-react-js
     ports:
       - "3000:3000"
