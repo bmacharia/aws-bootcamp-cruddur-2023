@@ -16,7 +16,6 @@ class HomeActivities:
       sql = """
       SELECT * FROM activities
       """
-
       with pool.connection() as conn:
         with conn.cursor() as cur:
           cur.execute(sql)
@@ -26,4 +25,4 @@ class HomeActivities:
       print("--------------")
       print(json)
       return json[0]
-      return results
+    
