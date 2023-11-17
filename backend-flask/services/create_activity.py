@@ -2,6 +2,8 @@ import uuid
 from datetime import datetime, timedelta, timezone
 class CreateActivity:
   def run(message, user_handle, ttl):
+
+    from lib.db import pool, print_sql_err
     model = {
       'errors': None,
       'data': None
@@ -49,3 +51,27 @@ class CreateActivity:
         'expires_at': (now + ttl_offset).isoformat()
       }
     return model
+
+     def create_activity(user_uuid, message, expires_at):
+        sql = f"""
+        INSER INTO (
+          user_uuid,
+          message,
+          expires_at
+        )
+        VALUES (
+          "{user_uuid}",
+          "{message}",
+          "{expires_at}"
+        )
+        """
+
+        try: 
+          conn = pool.connection()
+          cur = conn.cursor()
+          cur.execute(sql)
+          conn.commit()
+        except Exception as err:
+          print_sql_err(err)
+          #conn.rollback()
+
