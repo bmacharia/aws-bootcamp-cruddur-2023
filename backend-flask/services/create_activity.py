@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 class CreateActivity:
   def run(message, user_handle, ttl):
 
-    from lib.db import pool, print_sql_err
+    from lib.db import query_commit, print_sql_err
     model = {
       'errors': None,
       'data': None
@@ -65,6 +65,7 @@ class CreateActivity:
           "{expires_at}"
         )
         """
+        query_commit()
 
         try: 
           conn = pool.connection()
