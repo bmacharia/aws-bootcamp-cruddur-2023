@@ -56,20 +56,20 @@ class CreateActivity:
       }
     return model
 
-     def create_activity(user_uuid, message, expires_at):
-        sql = f"""
-        INSER INTO (
-          user_uuid,
-          message,
-          expires_at
-        )
-        VALUES (
-          "{user_uuid}",
-          "{message}",
-          "{expires_at}"
-        )
-        """
-        #query_commit()
+  def create_activity(user_uuid, message, expires_at):
+    sql = f"""
+      INSER INTO (
+        user_uuid,
+        message,
+        expires_at
+      )
+      VALUES (
+        "{user_uuid}",
+        "{message}",
+        "{expires_at}"
+      )
+      """
+      #query_commit()
 
       
 
