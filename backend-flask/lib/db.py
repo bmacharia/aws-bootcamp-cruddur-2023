@@ -22,7 +22,9 @@ class Db:
   def print_sql(self,title,sql):
     cyan = '\033[96m'
     no_color = '\033[0m'
+    print("\n")
     print(f'{cyan}SQL STATEMENT-[{title}]------{no_color}')
+    print(sql + "\n")
       
   def query_commit(self,sql,params):
       self.print_sql('commit with returning',sql)
