@@ -1,13 +1,9 @@
-import uuid
 from datetime import datetime, timedelta, timezone
 
 from lib.db import db
 
-
 class CreateActivity:
-  def run(message, user_handle, ttl):
-
-    from lib.db import query_commit, print_sql_err
+  def run(message, cognito_user_id, ttl):
     model = {
       'errors': None,
       'data': None
@@ -32,8 +28,8 @@ class CreateActivity:
     else:
       model['errors'] = ['ttl_blank']
 
-    if user_handle == None or len(user_handle) < 1:
-      model['errors'] = ['user_handle_blank']
+    if cognito_user_id == None or len(cognito_user_id) < 1:
+      model['errors'] = ['cognito_user_id_blank']
 
     if message == None or len(message) < 1:
       model['errors'] = ['message_blank'] 
@@ -47,25 +43,21 @@ class CreateActivity:
       }   
     else:
       expires_at = (now + ttl_offset)
-      CreateActivity.create_activity(user_handle,message,expires_at)
-      model['data'] = {
-        'uuid': uuid.uuid4(),
-        'display_name': 'Andrew Brown',
-        'handle':  user_handle,
-        'message': message,
-        'created_at': now.isoformat(),
-        'expires_at': (now + ttl_offset).isoformat()
-      }
+      uuid = CreateActivity.create_activity(cognito_user_id,message,expires_at)
+      object_json = CreateActivity.query_object_activity(uuid)
+      model['data'] = object_json
     return model
 
-  def create_activity(handle, message, expires_at):
-    sql = db.load_sql('create_activity.sql')
+  def create_activity(cognito_user_id, message, expires_at):
+    sql = db.template('activities','create')
     uuid = db.query_commit(sql,{
-        'handle': handle,
-        'message': message,
-        'expires_at' :expires_at
-      })
-      #def query_oblject_activity():
-
-      
-
+      'cognito_user_id': cognito_user_id,
+      'message': message,
+      'expires_at': expires_at
+    })
+    return uuid
+  def query_object_activity(uuid):
+    sql = db.template('activities','object')
+    return db.query_object_json(sql,{
+      'uuid': uuid
+    })
