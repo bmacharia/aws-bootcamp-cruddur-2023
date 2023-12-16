@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta, timezone
 from lib.ddb import Ddb
-from lib import db
+from lib.db import db
 
 class Messages:
-  def run(message_group_uuid, cognito_user_id):
+  def run(message_group_uuid,cognito_user_id):
     model = {
       'errors': None,
       'data': None
@@ -14,6 +14,7 @@ class Messages:
       'cognito_user_id': cognito_user_id
     })
 
+    print(f"UUID: {my_user_uuid}")
 
     ddb = Ddb.client()
     data = Ddb.list_messages(ddb, message_group_uuid)
