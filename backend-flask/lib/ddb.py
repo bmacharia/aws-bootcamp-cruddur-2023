@@ -14,6 +14,7 @@ class Ddb:
       attrs = {}
     dynamodb = boto3.client('dynamodb',**attrs)
     return dynamodb  
+
   def list_message_groups(client,my_user_uuid):
     year = str(datetime.now().year)
     table_name = 'cruddur-messages'
@@ -29,6 +30,7 @@ class Ddb:
     }
     print('query-params',query_params)
     print(query_params)
+
     # query the table
     response = client.query(**query_params)
     items = response['Items']
@@ -75,7 +77,8 @@ class Ddb:
       })
     return results
   def create_message(client,message_group_uuid, message, my_user_uuid, my_user_display_name, my_user_handle):
-    created_at = datetime.now().isoformat()
+    now = datetime.now(timezone.utc).astimezone().isoformat()
+    created_at = now
     message_uuid = str(uuid.uuid4())
 
     record = {
