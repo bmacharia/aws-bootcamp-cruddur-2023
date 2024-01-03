@@ -122,10 +122,14 @@ with app.app_context():
     got_request_exception.connect(rollbar.contrib.flask.report_exception, app)    
     
 
-@app.route('/rollbar/test')
-def rollbar_test():
-    rollbar.report_message('Hello World!', 'warning')
-    return "Hello World!"
+@app.route('/api/health-check')
+def health_check():
+  return {'success': True}, 200
+
+#s@app.route('/rollbar/test')
+#sdef rollbar_test():
+#s    rollbar.report_message('Hello World!', 'warning')
+#s    return "Hello World!"
 
 
 @app.route("/api/message_groups", methods=['GET'])

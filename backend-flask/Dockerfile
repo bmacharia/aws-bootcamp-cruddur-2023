@@ -1,5 +1,5 @@
 
-FROM python:3.10-slim-buster
+FROM 556068017473.dkr.ecr.us-west-2.amazonaws.com/cruddur-python:3.10-slim-buster
 
 # Inside the container
 # make a new folder inside of the container
@@ -20,9 +20,9 @@ COPY . .
 
 # environment varible used to configure the application
 # inside the container set when the container is running
-ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 EXPOSE ${PORT}
 
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567", "--debug"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
