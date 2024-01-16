@@ -607,3 +607,18 @@ docker run -rm \
 -e AWS_COGNITO_USER_POOL_CLIENT_ID="5b6ro31g97urk767adrbrdj1g5" \   
 -it backend-flask-prod
  ```
+
+
+cruddur-alb-1969314970.us-west-2.elb.amazonaws.com
+
+docker build \
+--build-arg REACT_APP_BACKEND_URL="http://cruddur-alb-1969314970.us-west-2.elb.amazonaws.com:4567" \
+--build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
+--build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
+--build-arg REACT_APP_AWS_USER_POOLS_ID="$AWS_USER_POOLS_ID" \
+--build-arg REACT_APP_CLIENT_ID="3053vq0l0b49qsrq4mt78t7mgg" \
+-t frontend-react-js \
+-f Dockerfile.prod \
+.
+
+

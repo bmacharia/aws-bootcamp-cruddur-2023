@@ -47,7 +47,7 @@
         "logConfiguration": {
           "logDriver": "awslogs",
           "options": {
-              "awslogs-group": "cruddur-log",
+              "awslogs-group": "cruddur",
               "awslogs-region": "us-west-2",
               "awslogs-stream-prefix": "frontend-react-js"
           }
