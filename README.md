@@ -31,3 +31,27 @@ The `/journal` directory contains
 - [ ] [Week 11](journal/week11.md)
 - [ ] [Week 12](journal/week12.md)
 - [ ] [Week 13](journal/week13.md)
+
+
+   "loadBalancers": [
+      {
+        "targetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:556068017473:targetgroup/cruddur-frontend-react-js/dc733e0bc4aac212",
+        "containerName": "frontend-react-js",
+        "containerPort": 3000
+      }
+  ],
+
+
+  docker build \
+--build-arg REACT_APP_BACKEND_URL="https://4567-$GITPOD_WORKSPACE_ID.$GITPOD_WORKSPACE_CLUSTER_HOST" \
+--build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
+--build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
+--build-arg REACT_APP_AWS_USER_POOLS_ID="us-west-2_P4oMs4M9w" \
+--build-arg REACT_APP_CLIENT_ID="3053vq0l0b49qsrq4mt78t7mgg" \
+-t frontend-react-js \
+-f Dockerfile.prod \
+.
+
+
+
+      REACT_APP_AWS_USER_POOLS_ID: "us-west-2_P4oMs4M9w"
