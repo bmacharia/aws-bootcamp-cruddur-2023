@@ -1,37 +1,46 @@
 {
-    "cluster": "cruddur",
-    "launchType": "FARGATE",
-    "desiredCount": 1,
-    "enableECSManagedTags": true,
-    "enableExecuteCommand": true,
-    "networkConfiguration": {
-      "awsvpcConfiguration": {
-        "assignPublicIp": "ENABLED",
-        "securityGroups": [
-            "sg-09ed330bbefe6d8f1"
-
-        ],
-        "subnets": [
-            "subnet-06b6040f86718fdb5",
-            "subnet-0ee4108c9480a337c",
-            "subnet-0044a8a1f622d921c",
-            "subnet-0352e55c094dacd52"
-  
-        ]
-      }
-    },
-    "propagateTags": "SERVICE",
-    "serviceName": "frontend-react-js",
-    "taskDefinition": "frontend-react-js",
-    "serviceConnectConfiguration": {
-      "enabled": true,
-      "namespace": "cruddur",
-      "services": [
-        {
-          "portName": "frontend-react-js",
-          "discoveryName": "frontend-react-js",
-          "clientAliases": [{"port": 3000}]
-        }
+  "cluster": "cruddur",
+  "launchType": "FARGATE",
+  "desiredCount": 1,
+  "enableECSManagedTags": true,
+  "enableExecuteCommand": true,
+  "loadBalancers": [
+    {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:556068017473:targetgroup/cruddur-frontend-react-js/dc733e0bc4aac212",
+      "containerName": "frontend-react-js",
+      "containerPort": 3000
+    }
+  ],
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "assignPublicIp": "ENABLED",
+      "securityGroups": [
+        "sg-09ed330bbefe6d8f1"
+      ],
+      "subnets": [
+        "subnet-06b6040f86718fdb5",
+        "subnet-0ee4108c9480a337c",
+        "subnet-0044a8a1f622d921c",
+        "subnet-0352e55c094dacd52"
       ]
     }
+  },
+  "propagateTags": "SERVICE",
+  "serviceName": "frontend-react-js",
+  "taskDefinition": "frontend-react-js",
+  "serviceConnectConfiguration": {
+    "enabled": true,
+    "namespace": "cruddur",
+    "services": [
+      {
+        "portName": "frontend-react-js",
+        "discoveryName": "frontend-react-js",
+        "clientAliases": [
+          {
+            "port": 3000
+          }
+        ]
+      }
+    ]
   }
+}
