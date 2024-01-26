@@ -51,18 +51,3 @@ The `/journal` directory contains
 -t frontend-react-js \
 -f Dockerfile.prod \
 .
-
-
-
-      REACT_APP_AWS_USER_POOLS_ID: "us-west-2_P4oMs4M9w"
-
-
-docker build \
---build-arg REACT_APP_BACKEND_URL="https://api.machokali.com" \
---build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
---build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
---build-arg REACT_APP_AWS_USER_POOLS_ID="ca-central-1_CQ4wDfnwc" \
---build-arg REACT_APP_CLIENT_ID="5b6ro31g97urk767adrbrdj1g5" \
--t frontend-react-js \
--f Dockerfile.prod \
-.
