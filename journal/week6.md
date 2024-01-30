@@ -623,7 +623,8 @@ docker build \
 
 .
 ```sh
-docker run -rm \
+docker run --rm \
+-p 4567:4567
 -e AWS_ENDPOINT_URL="http://dynamodb-local:8000" \
 -e CONNECTION_URL="postgresql://postgres:password@db:5432/cruddur" \
 -e FRONTEND_URL="https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}" \
