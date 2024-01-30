@@ -610,7 +610,7 @@ docker run -rm \
 
 
 cruddur-alb-1969314970.us-west-2.elb.amazonaws.com
-
+```sh
 docker build \
 --build-arg REACT_APP_BACKEND_URL="http://cruddur-alb-1969314970.us-west-2.elb.amazonaws.com:4567" \
 --build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
@@ -619,6 +619,8 @@ docker build \
 --build-arg REACT_APP_CLIENT_ID="3053vq0l0b49qsrq4mt78t7mgg" \
 -t frontend-react-js \
 -f Dockerfile.prod \
+```
+
 .
 ```sh
 docker run -rm \
