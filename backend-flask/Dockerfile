@@ -18,7 +18,6 @@ RUN pip3 install -r requirements.txt
 # second periond . /backend-flask (inside the container)
 COPY . .
 
-
 EXPOSE ${PORT}
 # CMD (command)
 # python3 -m flask run --host=0.0.0.0 --port=4567
