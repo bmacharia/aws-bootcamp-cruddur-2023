@@ -44,7 +44,7 @@
           {"name": "OTEL_EXPORTER_OTLP_ENDPOINT", "value": "https://api.honeycomb.io"},
           {"name": "AWS_COGNITO_USER_POOL_ID", "value": "us-west-2_P4oMs4M9w"},
           {"name": "AWS_COGNITO_USER_POOL_CLIENT_ID", "value": "3053vq0l0b49qsrq4mt78t7mgg"},
-          {"name": "FRONTEND_URL", "value": "https://machokali.com"},
+          {"name": "FRONTEND_URL", "value": "https://www.machokali.com"},
           {"name": "BACKEND_URL", "value": "https://api.machokali.com"},
           {"name": "AWS_DEFAULT_REGION", "value": "us-west-2"}
         ],
