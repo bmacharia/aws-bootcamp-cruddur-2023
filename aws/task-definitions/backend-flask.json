@@ -11,7 +11,7 @@
     "containerDefinitions": [
       {
         "name": "backend-flask",
-        "image": "556068017473.dkr.ecr.us-west-2.amazonaws.com/backend-flask:latest",
+        "image": "556068017473.dkr.ecr.us-west-2.amazonaws.com/backend-flask",
         "essential": true,
         "healthCheck": {
           "command": [
