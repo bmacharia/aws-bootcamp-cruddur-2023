@@ -80,3 +80,6 @@ docker run -rm \
 -e AWS_COGNITO_USER_POOL_ID="${AWS_COGNITO_USER_POOL_ID}" \
 -e AWS_COGNITO_USER_POOL_CLIENT_ID="3053vq0l0b49qsrq4mt78t7mgg" \   
 -it backend-flask-prod
+
+
+
