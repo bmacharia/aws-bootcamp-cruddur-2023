@@ -41,14 +41,4 @@ The `/journal` directory contains
 --build-arg REACT_APP_AWS_USER_POOLS_ID="us-west-2_P4oMs4M9w" \
 --build-arg REACT_APP_CLIENT_ID="3053vq0l0b49qsrq4mt78t7mgg" \
 -t frontend-react-js \
--f Dockerfile.prod \
-
-
-
-export PROD_CONNECTION_URL="postgresql://root:ThereIsNoKesho@cruddur-db-instance.cusewyozdrdt.us-west-2.rds.amazonaws.com:5432/cruddur"
-
-gp env PROD_CONNECTION_URL="postgresql://cruddurroot:ThereIsNoKesho@cruddur-db-instance.cusewyozdrdt.us-west-2.rds.amazonaws.com:5432/cruddur"
-
-ThereIsNoKesho
-
-ThereIsNoKesho
+-f Dockerfile.prod 
