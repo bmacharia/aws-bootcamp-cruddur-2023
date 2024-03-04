@@ -29,10 +29,10 @@
       "healthCheck": {
         "command": [
           "CMD-SHELL",
-          "python /backend-flask/bin/flask/health-check"
+          "python /backend-flask/bin/health-check"
         ],
         "interval": 30,
-        "timeout": 5,
+        "timeout": 15,
         "retries": 3,
         "startPeriod": 60
       },
@@ -57,8 +57,8 @@
         {"name": "OTEL_EXPORTER_OTLP_ENDPOINT", "value": "https://api.honeycomb.io"},
         {"name": "AWS_COGNITO_USER_POOL_ID", "value": "us-west-2_P4oMs4M9w"},
         {"name": "AWS_COGNITO_USER_POOL_CLIENT_ID", "value": "3053vq0l0b49qsrq4mt78t7mgg"},
-        {"name": "FRONTEND_URL", "value": "https://machokali.com"},
-        {"name": "BACKEND_URL", "value": "https://api.machokali.com"},
+        {"name": "FRONTEND_URL", "value": "https://the-yasuke.com"},
+        {"name": "BACKEND_URL", "value": "https://api.the-yasuke.com"},
         {"name": "AWS_DEFAULT_REGION", "value": "us-west-2"}
       ],
       "secrets": [
