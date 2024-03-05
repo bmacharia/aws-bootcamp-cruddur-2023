@@ -2,3 +2,5 @@ docker/**/*
 frontend-react-js/build/*
 
 __pycache__/
+
+*.env
