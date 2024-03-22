@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3n from 'aws-cdk-lib/aws-s3-notifications';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dotenv from 'dotenv';
 import { Construct } from 'constructs';
@@ -24,20 +25,29 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     console.log('topicName',topicName)
     console.log('functionPath',functionPath)
     
-    const bucket = this.createBucket(bucketName);
+    //const bucket = this.createBucket(bucketName);
+    const bucket = this.importBucket(bucketName);
     const lambda = this.createLambda(functionPath, bucketName, folderInput, folderOutput);
+
+    this.createS3NotifyToLambda(folderInput,lambda,bucket)
+
 
   
 }
     // A function that will create a s3 bucket
   createBucket(bucketName: string): s3.IBucket {
-    const bucket = new s3.Bucket(this, 'ThumbingBucket', {
+    const bucket = new s3.Bucket(this, 'AssetsBucket', {
       bucketName: bucketName,
       removalPolicy: cdk.RemovalPolicy.DESTROY
-  });
+    });
     return bucket;
+  }
 
-}
+  importBucket(bucketName:string):s3.IBucket {
+    const bucket = s3.Bucket.fromBucketName(this,"AssetsBucket",bucketName);
+    return bucket;
+  }
+  
   createLambda(functionPath: string, bucketName: string, folderInput: string, folderOutput: string): lambda.IFunction {
     const lambdaFunction = new lambda.Function(this, 'ThumbLambda',{
       runtime: lambda.Runtime.NODEJS_18_X,
@@ -55,4 +65,13 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     return lambdaFunction;
   }
 
+  createS3NotifyToLambda(prefix: string, lambda: lambda.IFunction, bucket: s3.IBucket): void {
+    const destination = new s3n.LambdaDestination(lambda);
+    bucket.addEventNotification(
+      s3.EventType.OBJECT_CREATED_PUT,
+      destination,
+      {prefix: prefix} // folder to contain the original images
+    )
+  }
 }
+
