@@ -1,20 +1,9 @@
 #! /usr/bin/bash
 
-if [ -z "$1" ]; then
-  echo "No TASK_ID argument supplied eg ./bin/ecs/connect-to-service 3e285316bcaa41ebaf0fb66c69b03f5a backend-flask"
-  exit 1
-fi
-TASK_ID=$1
+CYAN='\033[1;36m'
+NO_COLOR='\033[0m'
+LABEL="db-drop"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 
-CONTAINER_NAME=backend-flask
-
-echo "TASK ID: $TASK_ID"
-echo "Container Name: $CONTAINER_NAME"
-
-aws ecs execute-command \
-  --region $AWS_DEFAULT_REGION \
-  --cluster cruddur \
-  --task $TASK_ID \
-  --container $CONTAINER_NAME \
-  --command "/bin/bash" \
-  --interactive
+NO_DB_CONNECTION_URL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
+psql $NO_DB_CONNECTION_URL -c "drop database IF EXISTS cruddur;"
