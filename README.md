@@ -35,7 +35,7 @@ The `/journal` directory contains
 
 
   docker build \
---build-arg REACT_APP_BACKEND_URL="https://api.machokali.com" \
+--build-arg REACT_APP_BACKEND_URL="https://api.the-yasuke.com" \
 --build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
 --build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
 --build-arg REACT_APP_AWS_USER_POOLS_ID="us-west-2_P4oMs4M9w" \
