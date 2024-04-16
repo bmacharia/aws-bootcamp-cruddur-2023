@@ -13,7 +13,6 @@ export default function ProfileForm(props) {
   }, [props.profile])
 
   const s3uploadkey = async (extension)=> {
-    console.log('ext',extension)
     try {
       const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload`
       await getAccessToken()
@@ -26,7 +25,7 @@ export default function ProfileForm(props) {
         body: JSON.stringify(json),
         headers: {
           'Origin': process.env.REACT_APP_FRONTEND_URL,
-          'Authorization': `Bearer ${access_token}`,
+          'Authorization': `${access_token}`,
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
@@ -42,7 +41,7 @@ export default function ProfileForm(props) {
     }
   }
   const s3upload = async (event)=> {
-    console.log('event',event)
+
     const file = event.target.files[0]
     const filename = file.name
     const size = file.size
@@ -52,8 +51,9 @@ export default function ProfileForm(props) {
     const fileparts = filename.split('.')
     const extension = fileparts[fileparts.length-1]
     const presignedurl = await s3uploadkey(extension)
+    console.log("presignedurl", presignedurl)
+
     try {
-      console.log('s3upload')
       const res = await fetch(presignedurl, {
         method: "PUT",
         body: file,
@@ -109,6 +109,7 @@ export default function ProfileForm(props) {
     setDisplayName(event.target.value);
   }
 
+//   close the forum if we click outside the forum [(profile_popup) is a div that catch our click]
   const close = (event)=> {
     if (event.target.classList.contains("profile_popup")) {
       props.setPopped(false)
@@ -129,7 +130,7 @@ export default function ProfileForm(props) {
             </div>
           </div>
           <div className="popup_content">
-            
+
           <input type="file" name="avatarupload" onChange={s3upload} />
 
             <div className="field display_name">
