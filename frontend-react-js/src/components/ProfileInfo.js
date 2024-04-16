@@ -3,7 +3,6 @@ import ProfileAvatar from 'components/ProfileAvatar'
 import {ReactComponent as ElipsesIcon} from './svg/elipses.svg';
 import React from "react";
 
-// Authenication
 import { Auth } from 'aws-amplify';
 
 export default function ProfileInfo(props) {

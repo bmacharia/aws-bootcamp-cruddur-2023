@@ -1,19 +1,12 @@
 import './HomeFeedPage.css';
 import React from "react";
 
-// Authenication
-import {checkAuth, getAccessToken} from 'lib/CheckAuth';
-
-import DesktopNavigation  from 'components/DesktopNavigation';
-import DesktopSidebar     from 'components/DesktopSidebar';
-import ActivityFeed from 'components/ActivityFeed';
-import ActivityForm from 'components/ActivityForm';
-import ReplyForm from 'components/ReplyForm';
-
-
-import { trace, context, } from '@opentelemetry/api';
-
-
+import DesktopNavigation  from '../components/DesktopNavigation';
+import DesktopSidebar     from '../components/DesktopSidebar';
+import ActivityFeed from '../components/ActivityFeed';
+import ActivityForm from '../components/ActivityForm';
+import ReplyForm from '../components/ReplyForm';
+import {checkAuth, getAccessToken} from '../lib/CheckAuth';
 
 export default function HomeFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -24,8 +17,6 @@ export default function HomeFeedPage() {
   const dataFetchedRef = React.useRef(false);
 
   const loadData = async () => {
-    console.log(process.env.REACT_APP_BACKEND_URL);
-    console.log("Checking if REACT_APP_BACKEND_URL env is referenced okay")
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/home`
       await getAccessToken()
@@ -48,26 +39,13 @@ export default function HomeFeedPage() {
   };
 
 
-
+  
   React.useEffect(()=>{
     //prevents double call
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
 
-    const tracer = trace.getTracer();
-    const rootSpan = tracer.startActiveSpan('document_load', span => {
-      //start span when navigating to page
-      span.setAttribute('pageUrlwindow', window.location.href);
-      window.onload = (event) => {
-        // ... do loading things
-        // ... attach timing information
-        span.end(); //once page is loaded, end the span
-      };
-    
-    });
-
     loadData();
-    // check if we are authenicated
     checkAuth(setUser);
   }, [])
 
@@ -76,7 +54,6 @@ export default function HomeFeedPage() {
       <DesktopNavigation user={user} active={'home'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm  
-          user_handle={user}
           popped={popped}
           setPopped={setPopped} 
           setActivities={setActivities} 
@@ -103,3 +80,4 @@ export default function HomeFeedPage() {
     </article>
   );
 }
+
