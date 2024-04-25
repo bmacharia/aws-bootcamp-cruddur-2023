@@ -34,7 +34,11 @@ class {klass}Migration(Migration):
   def rollback():
     this.query_commit({klass}Migration.rollback_sql(),{{
     }})
+
+
+migration = AddBioColumnMigration
 """
+# remove leading and trailing new lines
 file_content = file_content.lstrip('\n').rstrip('\n')
 
 current_path = os.path.dirname(os.path.abspath(__file__))
