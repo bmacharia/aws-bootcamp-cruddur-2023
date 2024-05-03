@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS public.schema_information (
 );
 
 INSERT INTO public.schema_information(id, last_successful_run) 
-VALUES(0,'1')
+VALUES(1, '0')
 ON CONFLICT (id) DO NOTHING;
 
 CREATE TABLE public.users (

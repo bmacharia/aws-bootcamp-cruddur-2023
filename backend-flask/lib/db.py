@@ -76,6 +76,7 @@ class Db:
       self.print_params(params)
 
     wrapped_sql = self.query_wrap_object(sql)
+
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(wrapped_sql,params)
@@ -123,3 +124,4 @@ class Db:
     print ("pgcode:", err.pgcode, "\n")
 
 db = Db()
+
