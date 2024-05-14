@@ -1,5 +1,5 @@
 import './ProfileInfo.css';
-import ProfileAvatar from 'components/ProfileAvatar'
+import ProfileAvatar from '../components/ProfileAvatar'
 import {ReactComponent as ElipsesIcon} from './svg/elipses.svg';
 import React from "react";
 
