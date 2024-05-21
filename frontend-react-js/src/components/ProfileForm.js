@@ -17,6 +17,7 @@ export default function ProfileForm(props) {
     try {
       console.log('s3upload')
       const backend_url = "https://153wnn49x4.execute-api.us-west-2.amazonaws.com/avatars/key_upload"
+
       await getAccessToken()
       const access_token = localStorage.getItem("access_token")
       const res = await fetch(backend_url, {
@@ -33,7 +34,7 @@ export default function ProfileForm(props) {
         console.log(res)
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
   const s3upload = async (event)=> {
